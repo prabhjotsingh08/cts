@@ -55,8 +55,9 @@ const Contact = () => {
     setStatus(null)
 
     try {
-      // API call to local FastAPI proxy
-      const response = await axios.post('/api/contact', formData)
+      // API call to local FastAPI proxy or remote server
+      const apiUrl = import.meta.env.VITE_API_URL || ''
+      const response = await axios.post(`${apiUrl}/api/contact`, formData)
       
       if (response.status === 200 || response.status === 201) {
         setStatus('success')
